@@ -1,0 +1,381 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Successful</title>
+    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}" -->
+
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f8f4f7;
+    color: #333;
+    overflow-x: hidden;
+}
+
+
+/* Success Page */
+.success-page {
+    min-height: calc(100vh - 72px);
+    margin-top: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px;
+}
+
+/* Success Card */
+.success-card {
+    width: 100%;
+    max-width: 560px;
+
+    background: #ffffff;
+
+    border-radius: 15px;
+
+    padding: 25px 35px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 25px rgba(74, 25, 66, 0.12);
+
+    border: 1px solid #eee3eb;
+}
+
+/* Success Icon */
+.success-icon {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 12px;
+
+    border-radius: 50%;
+
+    background: #f1e3ee;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-icon-inner {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #4a1942,
+        #7b2c6d
+    );
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/* Heading */
+.success-card h1 {
+    color: #4a1942;
+
+    font-size: 27px;
+
+    margin-bottom: 7px;
+}
+
+.success-message {
+    color: #777;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    margin-bottom: 18px;
+}
+
+/* Order Details */
+.order-details {
+    background: #faf7f9;
+
+    border: 1px solid #eadde7;
+
+    border-radius: 10px;
+
+    padding: 15px 20px;
+
+    margin-bottom: 18px;
+
+    text-align: left;
+}
+
+.order-details h2 {
+    color: #4a1942;
+
+    font-size: 18px;
+
+    margin-bottom: 8px;
+
+    padding-bottom: 8px;
+
+    border-bottom: 1px solid #e8dce5;
+    text-align: center;
+}
+
+.detail-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 7px 0;
+
+    font-size: 14px;
+}
+
+.detail-label {
+    color: #777;
+}
+
+.detail-value {
+    color: #333;
+
+    font-weight: 600;
+}
+
+/* Total */
+.total-row {
+    border-top: 1px solid #e8dce5;
+
+    margin-top: 3px;
+
+    padding-top: 10px;
+}
+
+.total-row .detail-label {
+    color: #4a1942;
+
+    font-weight: bold;
+}
+
+.total-row .detail-value {
+    color: #7b2c6d;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+/* Status */
+.status {
+    display: inline-block;
+
+    background: #f1e3ee;
+
+    color: #6b245e;
+
+    padding: 5px 11px;
+
+    border-radius: 15px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-transform: capitalize;
+}
+
+/* Button */
+.shopping-btn {
+    display: block;
+
+    width: 100%;
+
+    padding: 11px;
+
+    background: linear-gradient(
+        135deg,
+        #4a1942,
+        #7b2c6d
+    );
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    transition: 0.3s ease;
+}
+
+.shopping-btn:hover {
+    background: linear-gradient(
+        135deg,
+        #3b1235,
+        #68245d
+    );
+
+    transform: translateY(-2px);
+}
+
+/* Footer */
+.confirmation-text {
+    margin-top: 10px;
+
+    color: #999;
+
+    font-size: 11px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    .success-page {
+        padding: 12px;
+    }
+
+    .success-card {
+        padding: 22px 18px;
+    }
+
+    .success-card h1 {
+        font-size: 24px;
+    }
+
+    .success-message {
+        font-size: 13px;
+    }
+
+    .order-details {
+        padding: 13px 15px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+    <div class="success-page">
+
+        <div class="success-card">
+
+
+            <!-- SUCCESS ICON -->
+
+            <div class="success-icon">
+
+                <div class="success-icon-inner">
+                    ✓
+                </div>
+
+            </div>
+
+
+            <!-- HEADING -->
+
+            <h1>
+                Payment Successful!
+            </h1>
+
+
+            <p class="success-message">
+                Thank you for your order. Your payment has been
+                successfully processed and your order has been confirmed.
+            </p>
+
+
+            <!-- ORDER DETAILS -->
+
+            <div class="order-details">
+
+                <h2>
+                    Order Details
+                </h2>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Order Number
+                    </span>
+
+                    <span class="detail-value">
+                        #{{ order.id }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row total-row">
+
+                    <span class="detail-label">
+                        Total Amount
+                    </span>
+
+                    <span class="detail-value">
+                        Rs. {{ order.total }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Payment Status
+                    </span>
+
+                    <span class="status">
+                        {{ order.status }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <a href="{% url 'homepage' %}" class="shopping-btn">
+                Continue Shopping
+            </a>
+
+
+            <p class="confirmation-text">
+                Your order has been placed successfully.
+            </p>
+
+
+        </div>
+
+    </div>
+
+</body>
+</html>

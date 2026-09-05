@@ -1,0 +1,47 @@
+{% load static %}
+
+<div class="cart-container" id="cart-panel">
+
+    <div class="cart-header">
+        <h1>My Cart</h1>
+        <span class="cart-close" id="cart-close">&times;</span>
+    </div>
+
+    {% if products %}
+
+        {% for item in products %}
+            <div class="cart-item">
+                <div class="cart-image">
+                    {% if item.product.image %}
+                        <img src="{% static item.product.image %}" alt="{{ item.product.name }}">
+                    {% endif %}
+                </div>
+
+                <div class="cart-details">
+                    <h2>{{ item.product.name }}</h2>
+                    <p>Price: Rs. {{ item.product.price }}</p>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <p>Subtotal: Rs. {{ item.subtotal }}</p>
+                    <button class="remove-item-btn" data-url="{% url 'remove_from_cart' item.id %}">
+                         Remove
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="cart-total">
+            <h2>Total: Rs. {{ total }}</h2>
+
+            <a href="{% url 'checkout' %}">
+                <button type="button">Proceed to Checkout</button>
+            </a>
+        </div>
+
+    {% else %}
+        <h2>Your cart is empty.</h2>
+        <a href="/" id="cart-continue">Continue Shopping</a>
+    {% endif %}
+
+</div>
+
+

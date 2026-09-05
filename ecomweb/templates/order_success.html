@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Confirmed</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"
+</head>
+
+<body>
+
+
+
+    <div class="order-confirmation">
+
+        <div class="confirmation-card">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h1>Order Confirmed!</h1>
+
+            <p class="thank-you">
+                Thank you for your order.
+            </p>
+
+            <div class="order-details">
+
+                <div class="order-detail">
+                    <span>Order Number</span>
+                    <span>#{{ order.id }}</span>
+                </div>
+
+                <div class="order-detail">
+                    <span>Payment Method</span>
+                    <span>{{ order.get_payment_method_display }}</span>
+                </div>
+
+                <div class="order-detail">
+                    <span>Status</span>
+                    <span>{{ order.get_status_display }}</span>
+                </div>
+
+                <div class="order-detail order-total">
+                    <span>Total</span>
+                    <span>Rs. {{ order.total }}</span>
+                </div>
+
+            </div>
+
+            <a href="{% url 'homepage' %}" class="continue-shopping">
+                Continue Shopping
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

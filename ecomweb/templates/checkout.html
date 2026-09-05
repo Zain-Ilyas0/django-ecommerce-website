@@ -1,0 +1,169 @@
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <h1>Checkout Page</h1>
+    <p>Total: Rs. {{ total }}</p>
+
+    <!-- shipping form, order placement logic to be added -->
+
+</body>
+</html> {% endcomment %}
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    {% include 'navbar.html' %}
+
+    <div class="checkout-container">
+
+        <h1>Checkout</h1>
+
+        <div class="checkout-content">
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+
+                <h2>Order Summary</h2>
+
+                {% for item in cart_items %}
+
+                <div class="checkout-item">
+
+                    <div>
+                        <h3>{{ item.product.name }}</h3>
+
+                        <p>
+                            Price: Rs. {{ item.product.price }}
+                        </p>
+
+                        <p>
+                            Quantity: {{ item.quantity }}
+                        </p>
+                    </div>
+
+                    <div>
+                        <strong>
+                            Rs. {% widthratio item.product.price 1 item.quantity %}
+                        </strong>
+                    </div>
+
+                </div>
+
+                {% empty %}
+
+                <p>Your cart is empty.</p>
+
+                {% endfor %}
+
+                <hr>
+
+                <h2>Total: Rs. {{ total }}</h2>
+
+            </div>
+
+
+            <!-- Shipping Information -->
+            <div class="shipping-form">
+
+                <h2>Shipping Information</h2>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <label for="name">Full Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                    >
+
+                    <label for="phone">Phone Number</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        required
+                    >
+
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                    >
+
+                    <label for="address">Address</label>
+                    <textarea
+                        id="address"
+                        name="address"
+                        rows="4"
+                        required
+                    ></textarea>
+
+                    <label for="city">City</label>
+                    <input
+                        type="text"
+                        id="city"
+                        name="city"
+                        required
+                    >
+
+                    <label for="postal_code">Postal Code</label>
+                    <input
+                        type="text"
+                        id="postal_code"
+                        name="postal_code"
+                    >
+
+
+                    <h3>Payment Method</h3>
+
+                    <label>
+                        <input type="radio" name="payment_method" value="stripe" checked>
+                        Pay with Stripe
+                    </label>
+                    <label>
+                        <input type="radio" name="payment_method" value="cod">
+                        Cash on Delivery
+                    </label>
+
+                    <br><br>
+
+                    <button type="submit">
+                        Place Order
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

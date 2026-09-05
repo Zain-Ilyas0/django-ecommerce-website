@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Store</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+    {% include 'navbar.html' %}
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <section class="hero">
+
+            <div class="hero-content">
+                <!-- <h1>Welcome to My Store</h1> -->
+
+                <p style="margin-top: 100px;">Find the products you love at the best prices.</p>
+
+                <a href="#" class="shop-btn">Shop Now</a>
+            </div>
+
+        </section>
+
+
+        <section class="categories">
+
+            <h2>Featured Products</h2>
+
+            <div class="category-container">
+
+                <div class="category">
+                    <img src="{% static 'images/f1.jpg' %}" alt="Product 1">
+                    <h3>Product 1</h3>
+                    <p>Product description here.</p>
+                </div>
+
+                <div class="category">
+                    <img src="{% static 'images/f2.jpg' %}" alt="Product 2">
+                    <h3>Product 2</h3>
+                    <p>Product description here.</p>
+                </div>
+
+                <div class="category">
+                    <img src="{% static 'images/f3.webp' %}" alt="Product 3">
+                    <h3>Product 3</h3>
+                    <p>Product description here.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+    
+
+    <!-- Categories -->
+    <section class="categories">
+
+        <h2>Shop By Category</h2>
+
+        <div class="category-container">
+
+            <div class="category">
+                <img src="{% static 'images/electronics.jpg' %}" alt="Electronics ">
+                <h3>Electronics</h3>
+                <p>Latest electronic products.</p>
+            </div>
+
+            <div class="category">
+                <img src="{% static 'images/clothes.jpg' %}" alt="Clothing ">
+                <h3>Clothing</h3>
+                <p>Trendy clothes for everyone.</p>
+            </div>
+
+            <div class="category">
+                <img src="{% static 'images/accessories.jpg' %}" alt="Accessories ">
+                <h3>Accessories</h3>
+                <p>Useful and stylish accessories.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+    <div class="credit">
+        Created by <span>Zain Ali</span> | All Rights Reserved
+    </div>
+</footer>
+
+</body>
+</html>

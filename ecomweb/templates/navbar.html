@@ -1,0 +1,213 @@
+{% load static %}
+
+<style>
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 45px;
+        align-items: center;
+    }
+
+    .nav-links li {
+        position: relative;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: white;
+        font-size: 20px;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        min-width: 180px;
+        list-style: none;
+        padding: 10px 0;
+        margin: 0;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        z-index: 1000;
+    }
+
+    .dropdown-menu li {
+        width: 100%;
+    }
+
+    .dropdown-menu li a {
+        display: block;
+        padding: 12px 20px;
+        color: #333;
+        font-size: 16px;
+    }
+
+    .dropdown-menu li a:hover {
+        background-color: #f0f0f0;
+        color: #6a1b5d;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+    .search-form {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+}
+
+.search-form input {
+    width: 400px;
+    height: 38px;
+    padding: 0 15px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    border-radius: 20px 0 0 20px;
+}
+
+.search-form button {
+    width: 45px;
+    height: 38px;
+    border: none;
+    background: white;
+    cursor: pointer;
+    font-size: 17px;
+    border-radius: 0 20px 20px 0;
+}
+
+.search-form button:hover {
+    background: #eeeeee;
+}
+</style>
+
+<!-- Top Navbar -->
+<nav class="navbar">
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle categories menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="logo">
+        My Store
+    </div>
+    <form action="{% url 'search' %}" method="GET" class="search-form">
+        <input 
+            type="text" 
+            name="q" 
+            placeholder="Search products..."
+            value="{{ request.GET.q }}"
+        >
+        <button type="submit">🔍</button>
+    </form>
+
+    <ul class="nav-menu">
+        <li><a href="{% url 'homepage' %}">Home</a></li>
+
+        <li class="dropdown">
+            <a href="#">Products ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Electronics</a></li>
+                <li><a href="#">Clothing</a></li>
+                <li><a href="#">Accessories</a></li>
+                <li><a href="#">Mobiles</a></li>
+                <li><a href="#">Laptops</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="{% url 'cart' %}" id="cart-toggle">
+                Cart <span id="cart-count">0</span>
+            </a>
+        </li>
+        <li><a href="#">My Orders</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+    </ul>
+
+</nav>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <h3>Categories</h3>
+    <ul>
+        <li>
+            <a href="{% url 'electronics' %}"
+               class="{% if request.resolver_match.url_name == 'electronics' %}active{% endif %}">
+                Electronics
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'clothing' %}"
+               class="{% if request.resolver_match.url_name == 'clothing' %}active{% endif %}">
+                Clothing
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'accessories' %}"
+               class="{% if request.resolver_match.url_name == 'accessories' %}active{% endif %}">
+                Accessories
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'mobiles' %}"
+               class="{% if request.resolver_match.url_name == 'mobiles' %}active{% endif %}">
+                Mobiles
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'laptops' %}"
+               class="{% if request.resolver_match.url_name == 'laptops' %}active{% endif %}">
+                Laptops
+            </a>
+        </li>
+    </ul>
+</aside>
+
+<!-- Overlay behind the open mobile sidebar -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div id="cart-overlay"></div>
+<div id="cart-panel-mount"></div>
+
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebarEl = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    function closeSidebarMenu() {
+        menuToggle.classList.remove('active');
+        sidebarEl.classList.remove('active');
+        overlay.classList.remove('active');
+    }
+
+    menuToggle.addEventListener('click', () => {
+        const isOpen = sidebarEl.classList.toggle('active');
+        menuToggle.classList.toggle('active', isOpen);
+        overlay.classList.toggle('active', isOpen);
+    });
+
+    overlay.addEventListener('click', closeSidebarMenu);
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 650) {
+            closeSidebarMenu();
+        }
+    });
+
+    sidebarEl.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeSidebarMenu);
+    });
+</script>
+
+<script>
+    const cartPanelUrl = "{% url 'cart_panel' %}";
+</script>
+<script src="{% static 'js/cart.js' %}"></script>

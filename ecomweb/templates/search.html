@@ -1,0 +1,86 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Search Results</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    {% include 'navbar.html' %}
+
+    <main class="search-results">
+
+        {% if query %}
+            <h1>Search results for "{{ query }}"</h1>
+        {% else %}
+            <h1>Search Products</h1>
+        {% endif %}
+
+
+        {% if products %}
+
+            <div class="product-grid">
+
+                {% for product in products %}
+
+    <div class="card search-product-card">
+
+        <!-- CLICKABLE IMAGE -->
+        <a href="{% url 'product_detail' product.id %}" class="product-detail-link">
+            <img src="{% static product.image %}"
+                 class="card-img-top"
+                 alt="{{ product.name }}">
+        </a>
+
+        <div class="card-body">
+
+            <!-- CLICKABLE TITLE -->
+            <a href="{% url 'product_detail' product.id %}"
+               class="product-detail-link">
+
+                <h5 class="card-title">
+                    {{ product.name }}
+                </h5>
+
+            </a>
+
+            <!-- DESCRIPTION -->
+            <p class="card-text">
+                {{ product.description }}
+            </p>
+
+            <!-- CATEGORY -->
+            <p class="card-text">
+                <strong>Category:</strong> {{ product.category }}
+            </p>
+
+            <!-- PRICE -->
+            <div class="price">
+                Rs. {{ product.price }}
+            </div>
+
+        </div>
+
+    </div>
+
+{% endfor %}
+
+            </div>
+
+        {% elif query %}
+
+            <p>No products found for "{{ query }}".</p>
+
+        {% endif %}
+
+    </main>
+
+</body>
+</html>

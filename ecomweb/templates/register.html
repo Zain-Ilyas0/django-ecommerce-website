@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register - My Store</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- Top Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            My Store
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="{% url 'homepage' %}">Home</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Cart</a></li>
+            <li><a href="#">My Orders</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+        </ul>
+
+    </nav>
+
+
+    <!-- Registration Form -->
+    <div class="register-container">
+
+        <div class="register-card">
+
+            <h1>Create Account</h1>
+
+            <p class="register-subtitle">
+                Register to start shopping at My Store
+            </p>
+
+            {% if error %}
+                <p class="error-message">{{ error }}</p>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        autocomplete="off"
+                        placeholder="Enter Your Name"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        autocomplete="off"
+                        placeholder="Enter Your Email"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="phone_number">Phone Number</label>
+
+                    <input
+                        type="tel" id="phone_number" name="phone_number" autocomplete="off" placeholder="Enter Your Phone Number" required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        autocomplete="new-password"
+                        placeholder="Enter Your Password"
+                        required
+                    >
+                </div>
+
+
+                <button type="submit" class="register-btn">
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <p class="login-text">
+                Already have an account?
+                <a href="{% url 'login' %}">Login</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
